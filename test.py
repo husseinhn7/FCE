@@ -1,21 +1,24 @@
-from ArgParser import create_command , Main_parser
-from command import ls , pack
+import mimetypes
+import magic
 
+# mime = magic.Magic(mime=True)
+# d = mime.from_file("test.py") 
 
-create_command(ls)
-create_command(pack)
+# # # Get a list of filenames used to search for MIME types
+# # filenames = mimetypes.knownfiles
 
-
-
-Main_parser.parse_args()
-
-
-
-
-
-
+# # # Print the list of filenames
+# # print("Filenames used to search for MIME types:")
+# # for filename in filenames:
+# #     print(filename)
 
 
 
+# t = mimetypes.guess_type("./d.png")
+# print(d )
 
+
+
+if "k":
+    print("djkfhdkjfhdkjfh")
 
