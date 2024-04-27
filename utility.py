@@ -28,7 +28,7 @@ def get_all_extensions(path):
 
 
 def create_xml(path):
-    with open(f"[Content_Types].xml" , "w") as f :
+    with open(f"../{path}[Content_Types].xml" , "w") as f :
         f.write('<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">')
         f.write(f'<Default Extension=".vsixmanifest" ContentType="text/xml" />')
         f.write(f'<Default Extension=".xml" ContentType="text/xml" />')
@@ -49,7 +49,7 @@ def create_xml(path):
             ".zip" : "application/zip",
             ".dll" : "application/octet-stream",          
         }
-        for ext in get_all_extensions(r"C:\Users\Dell\desktop\hediet.vscode-drawio-1.6.6"):
+        for ext in get_all_extensions():
             print(ext)
             try:
                 
@@ -78,17 +78,16 @@ def check_value(dict:dict , key:str , tag:str):
     
 def read_json_package():
     try : 
-        with open("temp/package.json" , 'r') as file :
+        with open("package.json" , 'r') as file :
             f = json.load(file)
             return f
     except :
         print("could not found package.json file")
 
 
-def create_manifest():
-    data = read_json_package()
+def create_manifest(data , name):
     if data:
-        with open('temp/extension.vsixmanifest' ,  "w" ) as manifest :
+        with open(f'../{name}/extension.vsixmanifest' ,  "w" ) as manifest :
             content  = f'''
             <?xml version="1.0" encoding="utf-8"?>
                         <PackageManifest Version="2.0.0" xmlns = "http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
@@ -134,20 +133,21 @@ def create_manifest():
             '''
             manifest.write(content)
             
-            
-        
-def create_vsix(name , version):
-    os.mkdir("temp/extension")
-    shutil.make_archive("temp" , "zip"  , "temp")
-    os.rename("temp.zip" , f"{name}-{version}.vsix")
+
+def ignore(directory, contents):
+    items_to_exclude = ['node_modules' , "package.json"  , "package-lock.json"]
+    return [item for item in contents if item in items_to_exclude]
 
 
-def co():
-    os.mkdir("test")
-    for x in read_files('.'):
-        shutil.copy(x , "test/")
-        print(x)
+def create_vsix(args=0):
+    
+    data = read_json_package()
+    final_name =  f"{data['name']}-{data['version']}"
+    shutil.copytree('./', f"../{final_name}/extension" , ignore=ignore)
+    create_manifest(data , final_name)
+    create_xml(final_name)
+    shutil.make_archive(f"../{final_name}" , "zip"  , f"{final_name}")
+    os.rename(f"../{final_name}.zip" , f"{final_name}.vsix")
+    shutil.move(f"../{final_name}.vsix" , './')
+    shutil.rmtree(f"../{final_name}")
 
-# create_manifest()
-
-co()

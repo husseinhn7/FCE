@@ -3,8 +3,8 @@ from ArgParser import create_command , Main_parser
 from function_handlers import command_handlers
 
 
-# for command in commands :
-create_command( ls )
+for command in commands :
+    create_command( command )
     
 arg = Main_parser.parse_args()
 

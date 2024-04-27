@@ -1,5 +1,5 @@
 import os 
-from utility import read_files
+from utility import read_files , create_vsix
 
 def ls_Handler(args):
     files_list = read_files(".")   
@@ -28,7 +28,7 @@ def ls_Handler(args):
 
 
 def pack_Handler(args):
-    pass
+    create_vsix()
 
 
 
