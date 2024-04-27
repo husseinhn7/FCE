@@ -28,7 +28,7 @@ def get_all_extensions(path):
 
 
 def create_xml(path):
-    with open(f"../{path}[Content_Types].xml" , "w") as f :
+    with open(f"../{path}/[Content_Types].xml" , "w") as f :
         f.write('<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">')
         f.write(f'<Default Extension=".vsixmanifest" ContentType="text/xml" />')
         f.write(f'<Default Extension=".xml" ContentType="text/xml" />')
@@ -49,8 +49,7 @@ def create_xml(path):
             ".zip" : "application/zip",
             ".dll" : "application/octet-stream",          
         }
-        for ext in get_all_extensions():
-            print(ext)
+        for ext in get_all_extensions("."):
             try:
                 
                 type = mimetypes.types_map[ext]
@@ -85,9 +84,9 @@ def read_json_package():
         print("could not found package.json file")
 
 
-def create_manifest(data , name):
+def create_manifest(data, path):
     if data:
-        with open(f'../{name}/extension.vsixmanifest' ,  "w" ) as manifest :
+        with open(f'../{path}/extension.vsixmanifest' ,  "w" ) as manifest :
             content  = f'''
             <?xml version="1.0" encoding="utf-8"?>
                         <PackageManifest Version="2.0.0" xmlns = "http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
@@ -133,21 +132,29 @@ def create_manifest(data , name):
             '''
             manifest.write(content)
             
+            
 
-def ignore(directory, contents):
-    items_to_exclude = ['node_modules' , "package.json"  , "package-lock.json"]
+
+    
+  
+def ignore_function(directory, contents):
+    items_to_exclude = ['extension.vsixmanifest', '[Content_Types].xml' , 'package-lock.json', 'node_modules' , 'vscode-drawio-1.6.6']
     return [item for item in contents if item in items_to_exclude]
 
 
-def create_vsix(args=0):
-    
-    data = read_json_package()
-    final_name =  f"{data['name']}-{data['version']}"
-    shutil.copytree('./', f"../{final_name}/extension" , ignore=ignore)
+
+       
+def create_vsix(data , args):
+    output_path = "./"
+    if args.out:
+        output_path = args.out
+    final_name = f"{data['name']}-{data['version']}"
+    shutil.copytree('./' , f"../{final_name}/extension" , ignore = ignore_function )
     create_manifest(data , final_name)
     create_xml(final_name)
-    shutil.make_archive(f"../{final_name}" , "zip"  , f"{final_name}")
-    os.rename(f"../{final_name}.zip" , f"{final_name}.vsix")
-    shutil.move(f"../{final_name}.vsix" , './')
+    shutil.make_archive( f"../{final_name}" , "zip" , f"../{final_name}" )
+    os.rename(f"../{final_name}.zip" , f"../{final_name}.vsix")
+    shutil.move(f"../{final_name}.vsix" , output_path)
     shutil.rmtree(f"../{final_name}")
+
 

@@ -21,7 +21,7 @@ ls  = { "name" : "ls",
 pack = { "name" : "pack",
     "help" : "Packages an extension",
     "options" : [
-        {"flag" : "-o"  ,"action" : "store_true"  , "fullFlag" : "--out <path>" , "help" : "Output .vsix extension file to <path> location (defaults to <name>-<version>.vsix)" },
+        {"flag" : "-o"  ,"action" : "store_true"  , "fullFlag" : "--out" , "help" : "Output .vsix extension file to <path> location (defaults to <name>-<version>.vsix)" },
         {"flag" : "-t"  ,"action" : "store_true"  , "fullFlag" : "--target" , "help" : "Use npm instead of yarn (default inferred from absence of yarn.lock or .yarnrc)" },
         {"flag" : "-s2" ,"action" : "store_true"  , "fullFlag" : "--ignore-other-target-folders" , "help" : "Ignore other target folders. Valid only when --target <target> is provided." },
         {"flag" : "-s3" ,"action" : "store_true"  , "fullFlag" : "--readme-path <path>" , "help" : "Path to README file (defaults to README.md)" },

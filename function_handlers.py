@@ -1,5 +1,5 @@
 import os 
-from utility import read_files , create_vsix
+from utility import read_files , create_vsix , read_json_package
 
 def ls_Handler(args):
     files_list = read_files(".")   
@@ -20,15 +20,10 @@ def ls_Handler(args):
     
 
 
-
-
-
-
-
-
-
 def pack_Handler(args):
-    create_vsix()
+    data = read_json_package() 
+    create_vsix(data , args )
+
 
 
 
