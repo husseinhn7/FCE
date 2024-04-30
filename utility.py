@@ -104,8 +104,8 @@ def create_manifest(data, path):
                                             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="{get_value(data ,"extensionPack")}" />
                                             <Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="{get_value(data ,"extensionKind")}" />
                                             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="{get_value(data ,"localizedLanguages")}" />
-                                            { check_value(data ,'preRelease' , '<Property Id="Microsoft.VisualStudio.Code.PreRelease"  Value = "{}" />' ) }
-                                            { check_value(data ,'sponsorLink' ,'<Property Id="Microsoft.VisualStudio.Code.SponsorLink" Value ="{}" />')}
+                                            {check_value(data ,'preRelease' , '<Property Id="Microsoft.VisualStudio.Code.PreRelease"  Value = "{}" />' ) }
+                                            {check_value(data ,'sponsorLink' ,'<Property Id="Microsoft.VisualStudio.Code.SponsorLink" Value ="{}" />')}
                                             {check_value(data , "repository" , '<Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="{}" />')}
                                             {check_value(data , "repository" , '<Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="{}" />')}
                                             {check_value(data , "repository" , '<Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="{}" />')}
