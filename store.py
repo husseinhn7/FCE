@@ -65,13 +65,15 @@ def add_publisher( args ):
      
 
 
-def delete_publisher(publisher):
+def delete_publisher(args):
+    publisher = args.pub
     store = open_store()
     if not get_publisher(publisher):
         return print("publisher does not  exists")
     for publisher_obj in store:
-        if publisher in publisher_obj:
+        if publisher == publisher_obj["name"]:
             store.remove(publisher_obj)
+            save(store)
             print(f"publisher {publisher} has been removed")
             break
 
@@ -80,4 +82,4 @@ def delete_publisher(publisher):
 def list_publishers( args ):
     store = open_store()   
     for publisher_obj in store:
-        print([publisher_obj.keys()][0])
+        print(publisher_obj["name"])

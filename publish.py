@@ -8,11 +8,7 @@ from store import get_publisher
 def publish(args):
     organization_url = 'https://marketplace.visualstudio.com' 
     print(organization_url)  
-    # try:
-    #     pat = args.pat
-    # except : 
-    #     return print("personal access token is required ")
-    # try:
+     
     data = read_json_package()
     publisherName = data['publisher']
 
@@ -29,8 +25,7 @@ def publish(args):
     with open(rf"{name}" , "rb") as f:
         file = f.read()
         data_stream = io.BytesIO(file)
-    # except:
-    #     return print(".vsix file is not found ") 
+    
     credentials = BasicAuthentication('', pat)
     client = GalleryClient(base_url = organization_url, creds = credentials)
     client.create_extension(data_stream)

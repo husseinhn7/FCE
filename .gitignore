@@ -3,3 +3,4 @@ js/
 tempCodeRunnerFile.py
 .env
 .fce
+__pycache__/

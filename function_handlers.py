@@ -5,7 +5,7 @@ from azure.devops.v7_1.gallery import GalleryClient
 import io
 
 from publish import publish
-from store import add_publisher , list_publishers
+from store import add_publisher , list_publishers , delete_publisher
 
 
 
@@ -104,7 +104,7 @@ command_handlers = {
     "publish"           :  lambda x : publish(x),
     "unpublish"         :  lambda x : unpublish_Handler(x),
     "login"             :  lambda x : add_publisher(x),
-    "logout"            :  lambda x : logout_Handler(x),
+    "logout"            :  lambda x : delete_publisher(x),
     "ls-publishers"     :  lambda x : list_publishers(x),
     "delete_publisher"  :  lambda x : delete_publisher_Handler(x),
     "verify_pat"        :  lambda x : verify_pat_Handler(x),

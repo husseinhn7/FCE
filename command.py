@@ -112,7 +112,9 @@ login  = {
 logout  = {
     "name" : "logout",
     "help" : "Removes a publisher to the list of known publishers",
-        "options" : []
+        "options" : [
+                {"action" : "store_true" , "fullFlag" : "--pub"  , "help" : "name of the publisher"},    
+        ]
 
 }
 
