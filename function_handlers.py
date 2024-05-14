@@ -1,5 +1,13 @@
 import os 
 from utility import read_files , create_vsix , read_json_package
+from msrest.authentication import BasicAuthentication
+from azure.devops.v7_1.gallery import GalleryClient
+import io
+
+from publish import publish
+from store import add_publisher , list_publishers
+
+
 
 def ls_Handler(args):
     files_list = read_files(".")   
@@ -42,7 +50,35 @@ def pack_Handler(args):
 
 
 def publish_Handler(args):
-    pass
+    # print(args)         
+    organization_url =  'https://marketplace.visualstudio.com'   
+
+    try:
+        pat = args.pat
+        
+    except : 
+        return print("personal access token is required ")
+    try:
+        data = read_json_package()
+        name = f"{data['name']}-{data['version']}.vsix" 
+        print(name)      
+        with open(rf"{name}" , "rb") as f:
+            file = f.read()
+            data_stream = io.BytesIO(file)
+    except:
+        return print(".vsix file is not found ") 
+    credentials = BasicAuthentication('', pat)
+    m = GalleryClient(base_url=organization_url, creds=credentials)
+    m.create_extension(data_stream)
+
+
+
+
+
+
+
+
+
 def unpublish_Handler(args):
     pass
 def login_Handler(args):
@@ -65,11 +101,11 @@ def search_Handler(args):
 command_handlers = {
     "ls"                :  lambda x : ls_Handler(x),
     "pack"              :  lambda x : pack_Handler(x),
-    "publish"           :  lambda x : pack_Handler(x),
+    "publish"           :  lambda x : publish(x),
     "unpublish"         :  lambda x : unpublish_Handler(x),
-    "login"             :  lambda x : login_Handler(x),
+    "login"             :  lambda x : add_publisher(x),
     "logout"            :  lambda x : logout_Handler(x),
-    "ls_publishers"     :  lambda x : ls_publishers_Handler(x),
+    "ls-publishers"     :  lambda x : list_publishers(x),
     "delete_publisher"  :  lambda x : delete_publisher_Handler(x),
     "verify_pat"        :  lambda x : verify_pat_Handler(x),
     "show"              :  lambda x : show_Handler(x),

@@ -1,4 +1,4 @@
-from command import commands  , ls 
+from command import commands  
 from ArgParser import create_command , Main_parser 
 from function_handlers import command_handlers
 
@@ -10,25 +10,8 @@ arg = Main_parser.parse_args()
 
 
 
-
-
-command_handlers
-
-try:
-    command_handlers[arg.program](arg)
-except KeyError:
-    print("no command exist ")
-
-
-
-
-
-
-# if arg.program == "ls" :
-#     if arg.yarn:
-#         print(" fuck offffffff ")
-f = arg.program
-# commands_functions[arg.program](arg)
-# print(arg.accumulate(arg.program))
-
+# try:
+command_handlers[arg.program](arg)
+# except KeyError:
+#     print("no command exist ")
 

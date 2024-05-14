@@ -1,18 +1,10 @@
-
-
-
-
-
-
-
-
 ls  = { "name" : "ls",
     "help" : "Lists all the files that will be published/packaged",
     "options" : [
         {"flag" : "-s"  ,"action" : "store_true"  , "fullFlag" :  "--yarn" , "help" : "Use yarn instead of npm (default inferred from presence of yarn.lock or .yarnrc)" },
         {"flag" : "-s1" ,"action" : "store_true"  , "fullFlag" :  "--no-yarn" , "help" : "Use npm instead of yarn (default inferred from absence of yarn.lock or .yarnrc)" },
         {"flag" : "-s2" ,"action" : "store_true"  , "fullFlag" :  "--packagedDependencies" , "help" : "Select packages that should be published only (includes dependencies)" },
-        {"flag" : "-s3" ,"action" : "store_const"  , "fullFlag" :  "--ignoreFile" , "help" : " Indicate alternative .vscodeignore" },
+        {"flag" : "-s3" ,"action" : "store_const" , "fullFlag" :  "--ignoreFile" , "help" : " Indicate alternative .vscodeignore" },
         {"flag" : "-s4" ,"action" : "store_true"  , "fullFlag" :  "--dependencies" , "help" : "Enable dependency detection via npm or yarn" },
         {"flag" : "-s5" ,"action" : "store_true"  , "fullFlag" :  "--no-dependencies" , "help" : "Disable dependency detection via npm or yarn" },
     ]
@@ -53,7 +45,7 @@ publish ={
     "name"  :  "publish",
     "help" : "Publishes an extension",
     "options" :[      
-            {"action" : "store_true" , "fullFlag" : "-p, --pat <token>" ,               "help" :                "Personal Access Token (defaults to VSCE_PAT environment variable)" },
+            {"action" : "store_true" , "fullFlag" : "--pat" ,               "help" :                "Personal Access Token (defaults to VSCE_PAT environment variable)" },
             {"action" : "store_true" , "fullFlag" : "-t, --target <targets...>" ,       "help" :        "Target architectures. Valid targets: win32-x64, win32-arm64, linux-x64, linux-arm64,linux-armhf, darwin-x64, darwin-arm64, alpine-x64, alpine-arm64, web" },
             {"action" : "store_true" , "fullFlag" : "--ignore-other-target-folders" ,   "help" :    "Ignore other target folders. Valid only when --target <target> is provided." },
             {"action" : "store_true" , "fullFlag" : "--readme-path <path>" ,            "help" :             "Path to README file (defaults to README.md)" },
@@ -87,7 +79,7 @@ unpublish = {
     "name" : "unpublish",
     "help" : "Unpublishes an extension. Example extension id: ms-vscode.live-server.",
     "options" : [
-        {"action" : "store_true" , "fullFlag" : "-p, --pat <token>" , "help" : "Personal Access Token"},
+        {"action" : "store_true" , "fullFlag" : "-p, --pat" , "help" : "Personal Access Token"},
         {"action" : "store_true" , "fullFlag" : "-f, --force"       , "help" : "Skip confirmation prompt when unpublishing an extension"},
         {"action" : "store_true" , "fullFlag" : "-h, --help"        , "help" : "display help for command"},
     ]
@@ -109,17 +101,13 @@ delete_publisher = {
 login  = {
     "name" : "login",
     "help" : "Adds a publisher to the list of known publishers",
-        "options" : []
+        "options" : [
+            {"action" : "store_true" , "fullFlag" : "--pat" , "help" : "Personal Access Token"},
+            {"action" : "store_true" , "fullFlag" : "--pub"  , "help" : "name of the publisher"},    
+        ]
 
 }
 
-login  = {
-    "name" : "login",
-    "help" : "Adds a publisher to the list of known publishers",
-        "options" : []
-
-    
-}
 
 logout  = {
     "name" : "logout",

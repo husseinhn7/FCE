@@ -1,24 +1,7 @@
+import shutil
 import os 
-import mimetypes
 import json
-import shutil 
-
-def read_files(path):
-    files_list = []
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            full_path = os.path.join(root, file)
-            files_list.append(full_path)
-    return  files_list
-
-
-
-
-
-
-
-
-
+import mimetypes
 
 
 
@@ -30,8 +13,7 @@ def get_all_extensions(path):
     for root, dirs, files in os.walk(path):
         if "node_modules" not in root:
             for file in files:
-                All_files.append(root)
-                
+                All_files.append(root)            
                 _, extension = os.path.splitext(file)
                 extensions.add(extension.lower()) 
     extensions = { x for x  in extensions if x != "" }
@@ -62,7 +44,8 @@ def create_xml(path):
             ".dll" : "application/octet-stream",          
         }
         for ext in get_all_extensions("."):
-            try:               
+            try:
+                
                 type = mimetypes.types_map[ext]
             except KeyError:
                 try:               
@@ -85,7 +68,11 @@ def check_value(dict:dict , key:str , tag:str):
         return tag.format(value)
     return ''
     
-    
+
+
+
+
+
 def read_json_package():
     try : 
         with open("package.json" , 'r') as file :
@@ -187,4 +174,9 @@ def create_vsix(data , args):
     except:
         pass
 
+
+
+def pack_Handler(args):
+    data = read_json_package() 
+    create_vsix(data , args )
 

@@ -1,11 +1,12 @@
 {
-    "name": "vscode-drawio",
+    "name": "difname",
     "private": true,
-    "displayName": "Draw.io Integration",
+    "displayName": "Draw.iodifname index.jstion",
     "description": "This unofficial extension integrates Draw.io into VS Code.",
     "version": "1.6.6",
     "license": "GPL-3.0",
-    "publisher": "hediet",
+    "pricing": "Free",
+    "publisher": "Husseinhn77",
     "keywords": [
         "drawio",
         "diagram",
@@ -17,10 +18,8 @@
     ],
     "author": {
         "email": "henning.dieterichs@live.de",
-        "name": "Henning Dieterichs"
+        "name": "Husseinhn77hs"
     },
-    "readme": "./README.md",
-    "icon": "docs/logo.drawio.png",
     "extensionKind": [
         "ui",
         "workspace"
@@ -39,8 +38,8 @@
     "repository": {
         "url": "https://github.com/hediet/vscode-drawio.git"
     },
-    "browser": "./dist/extension/index",
-    "main": "./dist/extension/index",
+    "browser": "./index",
+    "main": "./index",
     "capabilities": {
         "untrustedWorkspaces": {
             "supported": true
@@ -453,43 +452,10 @@
         "dev-drawio-plugins-web": "webpack-dev-server --hot --config ./drawio-custom-plugins/webpack.config.ts"
     },
     "devDependencies": {
-        "@actions/exec": "^1.0.4",
-        "@actions/github": "^2.2.0",
-        "@hediet/semver": "^0.2.1",
-        "@types/copy-webpack-plugin": "^8.0.1",
-        "@types/mithril": "^2.0.4",
-        "@types/node": "^13.13.5",
-        "@types/vscode": "1.46.0",
-        "@types/xml-formatter": "^1.1.0",
-        "clean-webpack-plugin": "^4.0.0-alpha.0",
-        "copy-webpack-plugin": "^9.0.1",
-        "css-loader": "^3.4.2",
-        "ovsx": "^0.1.0-next.e000fdb",
-        "prettier": "^2.3.2",
-        "raw-loader": "^4.0.1",
-        "style-loader": "^1.1.3",
-        "ts-loader": "^9.2.3",
-        "ts-node": "^10.1.0",
-        "tslint": "^6.1.2",
-        "typescript": "^4.3.5",
-        "vsce": "^1.95.1",
-        "webpack": "^5.44.0",
-        "webpack-cli": "^4.7.2",
-        "webpack-dev-server": "^3.11.2"
+   
     },
     "dependencies": {
-        "@hediet/json-to-dictionary": "^0.2.1",
-        "@hediet/std": "0.6.0",
-        "@knuddels/mobx-logger": "^1.1.1",
-        "buffer": "^6.0.3",
-        "js-sha256": "^0.9.0",
-        "mithril": "^2.0.4",
-        "mobx": "5.15.4",
-        "mobx-utils": "5.5.7",
-        "path-browserify": "^1.0.1",
-        "vsls": "^1.0.3015",
-        "xml-formatter": "^2.0.1",
-        "xml-parser-xo": "^3.0.0"
+       
     },
     "versionName": "1.6.6"
 }
